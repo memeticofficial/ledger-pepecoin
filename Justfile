@@ -7,7 +7,6 @@ export RUST_BACKTRACE := "full"
 
 # Initialize project: fetch dependencies (SDK etc...)
 init:
-    just deps/sdk true
     just make deps
     just make zemu_install
 

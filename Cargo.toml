@@ -8,10 +8,10 @@ edition = "2018"
 authors = ["Zondax <hello@zondax.ch>"]
 
 [workspace.dependencies]
-bolos = { path = "deps/ledger-rust/bolos" }
-bolos-common = { path = "deps/ledger-rust/bolos-common" }
-zemu-sys = { path = "deps/ledger-rust/zemu" }
-zuit = { path = "deps/ledger-rust/zuit" }
+bolos = { git = "https://github.com/Zondax/ledger-rust", rev = "ec6eb97" }
+bolos-common = { git = "https://github.com/Zondax/ledger-rust", rev = "ec6eb97" }
+zemu-sys = { git = "https://github.com/Zondax/ledger-rust", rev = "ec6eb97" }
+zuit = { git = "https://github.com/Zondax/ledger-rust", rev = "ec6eb97" }
 
 [profile.dev]
 panic = "abort"

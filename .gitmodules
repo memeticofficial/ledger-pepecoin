@@ -1,3 +1,0 @@
-[submodule "deps/ledger-rust"]
-	path = deps/ledger-rust
-	url = https://github.com/Zondax/ledger-rust
