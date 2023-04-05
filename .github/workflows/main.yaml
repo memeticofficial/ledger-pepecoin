@@ -65,34 +65,31 @@ jobs:
     needs: configure
     runs-on: ubuntu-latest
     container:
-      image: zondax/builder-bolos:latest
+      image: zondax/ledger-app-builder:latest
       options: --user ${{ needs.configure.outputs.uid_gid }}
     env:
-      BOLOS_ENV: /opt/bolos
       HOME: /home/zondax_circle
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: cd deps; sh get_sdk.sh
-
       - name: Cache/restore Cargo dependencies
         uses: actions/cache@v1
         with:
           path: ./app/.cargo
-          key: ${{ runner.os }}-${{ hashFiles('./rust/Cargo.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('./Cargo.lock') }}
 
       - name: Build Nano S apps
         shell: bash -l {0}
         env:
-          BOLOS_SDK: ${{ github.workspace }}/deps/nanos-secure-sdk
+          BOLOS_SDK: /opt/nanos-secure-sdk
         run: |
           source $HOME/.cargo/env
           make
       - name: Build Nano X apps
         shell: bash -l {0}
         env:
-          BOLOS_SDK: ${{ github.workspace }}/deps/nanox-secure-sdk
+          BOLOS_SDK: /opt/nanox-secure-sdk
         run: |
           source $HOME/.cargo/env
           make clean
@@ -100,7 +97,7 @@ jobs:
       - name: Build Nano S+ apps
         shell: bash -l {0}
         env:
-          BOLOS_SDK: ${{ github.workspace }}/deps/nanosplus-secure-sdk
+          BOLOS_SDK: /opt/nanosplus-secure-sdk
         run: |
           source $HOME/.cargo/env
           make clean
